@@ -5,7 +5,6 @@ import (
 
 	"github.com/chaitanyamaili/financial-account-management/api/config"
 	"github.com/chaitanyamaili/financial-account-management/api/database"
-	"github.com/chaitanyamaili/financial-account-management/api/models"
 	"github.com/chaitanyamaili/financial-account-management/api/routes"
 	"github.com/gofiber/fiber/v2"
 )
@@ -17,7 +16,7 @@ func main() {
 	database.ConnectDB(cfg)
 
 	// Migrate the database
-	database.DB.AutoMigrate(&models.User{})
+	// database.DB.AutoMigrate(&models.User{})
 
 	// Create a new Fiber instance
 	app := fiber.New()

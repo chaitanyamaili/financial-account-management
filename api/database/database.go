@@ -7,6 +7,7 @@ import (
 	"github.com/chaitanyamaili/financial-account-management/api/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
 )
 
 var DB *gorm.DB
@@ -20,7 +21,13 @@ func ConnectDB(cfg *config.Config) {
 	)
 
 	var err error
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			TablePrefix:   "fam.",
+			SingularTable: false,
+		},
+	})
+
 	if err != nil {
 		log.Fatal("Failed to connect to the database:", err)
 	}
