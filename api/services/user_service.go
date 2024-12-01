@@ -20,3 +20,7 @@ func GetAllUsers() ([]models.User, error) {
 	err := database.DB.Find(&users).Error
 	return users, err
 }
+
+func DeleteUserByUsername(username string) error {
+	return database.DB.Where("username = ?", username).Delete(&models.User{}).Error
+}

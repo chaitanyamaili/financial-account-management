@@ -33,3 +33,11 @@ func GetAllUsers(c *fiber.Ctx) error {
 	}
 	return c.JSON(users)
 }
+
+func DeleteUserByUsername(c *fiber.Ctx) error {
+	username := c.Params("username")
+	if err := services.DeleteUserByUsername(username); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to delete user"})
+	}
+	return c.SendStatus(fiber.StatusNoContent)
+}
